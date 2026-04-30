@@ -1,0 +1,14 @@
+.vs/
+bin/
+obj/
+
+*.user
+*.suo
+*.rsuser
+
+*.dll
+*.exe
+*.pdb
+
+TestResults/
+.vscode/
