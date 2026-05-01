@@ -52,8 +52,10 @@ public class EmpresaService : IEmpresaService
     {
         if (string.IsNullOrWhiteSpace(nome))
             throw new ArgumentException("Nome da empresa é obrigatório.");
-    public Task<IEnumerable<EmpresaResponse>> ListarEmpresasAsync()
-    {
-        return _empresaRepository.ListarEmpresasAsync();
     }
+
+    //public Task<IEnumerable<EmpresaResponse>> ListarEmpresasAsync()
+    //{
+    //    return _empresaRepository.ListarEmpresasAsync();
+    //}
 }
