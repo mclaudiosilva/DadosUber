@@ -67,5 +67,6 @@ public class EmpresaRepository : IEmpresaRepository
         using var connection = _dbConnectionFactory.CreateConnection();
         var count = await connection.ExecuteScalarAsync<int>(sql, new { IdEmpresa = idEmpresa });
         return count > 0;
+
     }
 }
