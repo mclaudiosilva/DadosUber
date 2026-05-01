@@ -1,8 +1,11 @@
+using Dapper;
 using DadosAplicativo.Api.Data;
 using DadosAplicativo.Api.Interfaces.Repositories;
 using DadosAplicativo.Api.Interfaces.Services;
 using DadosAplicativo.Api.Repositories;
 using DadosAplicativo.Api.Services;
+
+DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 var builder = WebApplication.CreateBuilder(args);
 
