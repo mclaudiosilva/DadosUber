@@ -68,8 +68,5 @@ public class EmpresaRepository : IEmpresaRepository
         var count = await connection.ExecuteScalarAsync<int>(sql, new { IdEmpresa = idEmpresa });
         return count > 0;
 
-        return await connection.QueryAsync<EmpresaResponse>(
-            "sp_listar_empresas",
-            commandType: CommandType.StoredProcedure);
     }
 }
