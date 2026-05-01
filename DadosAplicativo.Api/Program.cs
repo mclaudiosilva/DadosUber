@@ -19,6 +19,8 @@ builder.Services.AddScoped<IDadosDiaRepository, DadosDiaRepository>();
 builder.Services.AddScoped<ILancamentoRepository, LancamentoRepository>();
 builder.Services.AddScoped<IDadosDiaService, DadosDiaService>();
 builder.Services.AddScoped<ILancamentoService, LancamentoService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddCors(options =>
 {
@@ -35,8 +37,6 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-    app.UseSwagger();
-    app.UseSwaggerUI();
 
 
 app.UseHttpsRedirection();
