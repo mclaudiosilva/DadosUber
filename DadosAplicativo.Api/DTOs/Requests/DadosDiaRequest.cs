@@ -8,4 +8,5 @@ public class DadosDiaRequest
     public double MediaConsumo { get; set; }
     public decimal ValorMedioCombustivel { get; set; }
     public decimal ValorAbastecido { get; set; }
+    public decimal? HorasTrabalhadas { get; set; }
 }

@@ -44,7 +44,7 @@ public class DadosDiaService : IDadosDiaService
 
     private static void Validar(DadosDiaRequest request)
     {
-        if (request.ValorAlimentacao < 0 || request.TotalKmRodado < 0 || request.MediaConsumo < 0 || request.ValorMedioCombustivel < 0 || request.ValorAbastecido < 0)
+        if (request.ValorAlimentacao < 0 || request.TotalKmRodado < 0 || request.MediaConsumo < 0 || request.ValorMedioCombustivel < 0 || request.ValorAbastecido < 0 || (request.HorasTrabalhadas.HasValue && request.HorasTrabalhadas.Value < 0))        
             throw new ArgumentException("Não são permitidos valores negativos.");
     }
 }

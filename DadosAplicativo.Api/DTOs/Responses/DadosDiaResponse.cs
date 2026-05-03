@@ -9,6 +9,7 @@ public class DadosDiaResponse
     public double MediaConsumo { get; set; }
     public decimal ValorMedioCombustivel { get; set; }
     public decimal ValorAbastecido { get; set; }
+    public decimal? HorasTrabalhadas { get; set; }
     public decimal LitrosConsumidos { get; set; }
     public decimal GastoCombustivelReal { get; set; }
     public decimal TotalCorridas { get; set; }

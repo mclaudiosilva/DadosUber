@@ -16,6 +16,8 @@ public class DadosDiaRepository : IDadosDiaRepository
 
     public async Task<int> CriarAsync(DadosDiaRequest request)
     {
+        const string sql = @"INSERT INTO dados_do_dia (data, valorAlimentacao, totalKmRodado, mediaConsumo, valorMedioCombustivel, valorAbastecido, horas_trabalhadas)
+VALUES (@Data, @ValorAlimentacao, @TotalKmRodado, @MediaConsumo, @ValorMedioCombustivel, @ValorAbastecido, @HorasTrabalhadas);
         const string sql = @"INSERT INTO dados_do_dia (data, valorAlimentacao, totalKmRodado, mediaConsumo, valorMedioCombustivel, valorAbastecido)
 VALUES (@Data, @ValorAlimentacao, @TotalKmRodado, @MediaConsumo, @ValorMedioCombustivel, @ValorAbastecido);
 SELECT LAST_INSERT_ID();";
@@ -27,6 +29,10 @@ SELECT LAST_INSERT_ID();";
     {
         const string sql = @"UPDATE dados_do_dia 
 SET data = @Data, valorAlimentacao = @ValorAlimentacao, totalKmRodado = @TotalKmRodado, mediaConsumo = @MediaConsumo,
+valorMedioCombustivel = @ValorMedioCombustivel, valorAbastecido = @ValorAbastecido, horas_trabalhadas = @HorasTrabalhadas
+WHERE id = @Id";
+        using var connection = _dbConnectionFactory.CreateConnection();
+        var rows = await connection.ExecuteAsync(sql, new { Id = id, request.Data, request.ValorAlimentacao, request.TotalKmRodado, request.MediaConsumo, request.ValorMedioCombustivel, request.ValorAbastecido, request.HorasTrabalhadas });
 valorMedioCombustivel = @ValorMedioCombustivel, valorAbastecido = @ValorAbastecido
 WHERE id = @Id";
         using var connection = _dbConnectionFactory.CreateConnection();

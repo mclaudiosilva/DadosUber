@@ -12,4 +12,6 @@ public class ResumoPeriodoResponse
     public decimal LitrosConsumidos { get; set; }
     public decimal GastoCombustivelReal { get; set; }
     public decimal LucroRealEstimado { get; set; }
+    public decimal TotalHorasTrabalhadas { get; set; }
+    public decimal GanhoPorHora => TotalHorasTrabalhadas <= 0 ? 0 : LucroRealEstimado / TotalHorasTrabalhadas;
 }
