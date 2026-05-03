@@ -42,6 +42,19 @@ public class LancamentoService : ILancamentoService
     {
         if (request.ValorCorridas < 0)
             throw new ArgumentException("Valor de corrida não pode ser negativo.");
+
+        if (request.IdDadosDoDia <= 0)
+        {
+            var idDadosDoDia = await _dadosDiaRepository.ObterIdPorDataAsync(request.Data);
+            if (!idDadosDoDia.HasValue)
+                throw new ArgumentException("Não há Dados do Dia cadastrados para esta data. Cadastre primeiro.");
+            request.IdDadosDoDia = idDadosDoDia.Value;
+        }
+        else if (!await _dadosDiaRepository.ExistePorIdAsync(request.IdDadosDoDia))
+        {
+            throw new ArgumentException("IdDadosDoDia informado não existe.");
+        }
+
         if (request.HorarioFim < request.HorarioInicio)
             throw new ArgumentException("Horário fim não pode ser menor que horário início.");
         if (!await _dadosDiaRepository.ExistePorIdAsync(request.IdDadosDoDia))

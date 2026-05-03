@@ -17,10 +17,7 @@ public class DadosDiaRepository : IDadosDiaRepository
     public async Task<int> CriarAsync(DadosDiaRequest request)
     {
         const string sql = @"INSERT INTO dados_do_dia (data, valorAlimentacao, totalKmRodado, mediaConsumo, valorMedioCombustivel, valorAbastecido, horas_trabalhadas)
-VALUES (@Data, @ValorAlimentacao, @TotalKmRodado, @MediaConsumo, @ValorMedioCombustivel, @ValorAbastecido, @HorasTrabalhadas);
-        const string sql = @"INSERT INTO dados_do_dia (data, valorAlimentacao, totalKmRodado, mediaConsumo, valorMedioCombustivel, valorAbastecido)
-VALUES (@Data, @ValorAlimentacao, @TotalKmRodado, @MediaConsumo, @ValorMedioCombustivel, @ValorAbastecido);
-SELECT LAST_INSERT_ID();";
+VALUES (@Data, @ValorAlimentacao, @TotalKmRodado, @MediaConsumo, @ValorMedioCombustivel, @ValorAbastecido, @HorasTrabalhadas);SELECT LAST_INSERT_ID();";
         using var connection = _dbConnectionFactory.CreateConnection();
         return await connection.ExecuteScalarAsync<int>(sql, request);
     }
@@ -35,8 +32,7 @@ WHERE id = @Id";
         var rows = await connection.ExecuteAsync(sql, new { Id = id, request.Data, request.ValorAlimentacao, request.TotalKmRodado, request.MediaConsumo, request.ValorMedioCombustivel, request.ValorAbastecido, request.HorasTrabalhadas });
 valorMedioCombustivel = @ValorMedioCombustivel, valorAbastecido = @ValorAbastecido
 WHERE id = @Id";
-        using var connection = _dbConnectionFactory.CreateConnection();
-        var rows = await connection.ExecuteAsync(sql, new { Id = id, request.Data, request.ValorAlimentacao, request.TotalKmRodado, request.MediaConsumo, request.ValorMedioCombustivel, request.ValorAbastecido });
+       
         return rows > 0;
     }
 
@@ -71,4 +67,11 @@ WHERE id = @Id";
         var count = await connection.ExecuteScalarAsync<int>(sql, new { IdDadosDia = idDadosDia });
         return count > 0;
     }
+    public async Task<int?> ObterIdPorDataAsync(DateTime data)
+    {
+        const string sql = "SELECT id FROM dados_do_dia WHERE data = @Data LIMIT 1";
+        using var connection = _dbConnectionFactory.CreateConnection();
+        return await connection.ExecuteScalarAsync<int?>(sql, new { Data = data.Date });
+    }
+
 }

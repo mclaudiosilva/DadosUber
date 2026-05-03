@@ -10,4 +10,5 @@ public interface IDadosDiaRepository
     Task<bool> ExistePorDataAsync(DateTime data, int? idIgnorar = null);
     Task<bool> ExisteLancamentoVinculadoAsync(int idDadosDia);
     Task<bool> ExistePorIdAsync(int idDadosDia);
+    Task<int?> ObterIdPorDataAsync(DateTime data);
 }
