@@ -55,6 +55,10 @@ public class LancamentoService : ILancamentoService
             throw new ArgumentException("IdDadosDoDia informado não existe.");
         }
 
+        if (request.HorarioFim < request.HorarioInicio)
+            throw new ArgumentException("Horário fim não pode ser menor que horário início.");
+        if (!await _dadosDiaRepository.ExistePorIdAsync(request.IdDadosDoDia))
+            throw new ArgumentException("IdDadosDoDia informado não existe.");
         if (!await _empresaRepository.ExistePorIdAsync(request.IdEmpresa))
             throw new ArgumentException("IdEmpresa informado não existe.");
     }
