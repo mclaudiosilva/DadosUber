@@ -18,6 +18,8 @@ public class LancamentoRepository : ILancamentoRepository
     {
         const string sql = @"INSERT INTO lancamento (id_dados_do_dia, data, id_empresa, valor_corridas)
 VALUES (@IdDadosDoDia, @Data, @IdEmpresa, @ValorCorridas);
+        const string sql = @"INSERT INTO lancamento (id_dados_do_dia, data, id_empresa, horarioInicio, horarioFim, valor_corridas)
+VALUES (@IdDadosDoDia, @Data, @IdEmpresa, @HorarioInicio, @HorarioFim, @ValorCorridas);
 SELECT LAST_INSERT_ID();";
         using var connection = _dbConnectionFactory.CreateConnection();
         return await connection.ExecuteScalarAsync<int>(sql, request);
@@ -29,6 +31,9 @@ SELECT LAST_INSERT_ID();";
 valor_corridas = @ValorCorridas WHERE id = @Id";
         using var connection = _dbConnectionFactory.CreateConnection();
         var rows = await connection.ExecuteAsync(sql, new { Id = id, request.IdDadosDoDia, request.Data, request.IdEmpresa, request.ValorCorridas });
+horarioInicio = @HorarioInicio, horarioFim = @HorarioFim, valor_corridas = @ValorCorridas WHERE id = @Id";
+        using var connection = _dbConnectionFactory.CreateConnection();
+        var rows = await connection.ExecuteAsync(sql, new { Id = id, request.IdDadosDoDia, request.Data, request.IdEmpresa, request.HorarioInicio, request.HorarioFim, request.ValorCorridas });
         return rows > 0;
     }
 

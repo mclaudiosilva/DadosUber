@@ -18,6 +18,8 @@ public class DadosDiaRepository : IDadosDiaRepository
     {
         const string sql = @"INSERT INTO dados_do_dia (data, valorAlimentacao, totalKmRodado, mediaConsumo, valorMedioCombustivel, valorAbastecido, horas_trabalhadas)
 VALUES (@Data, @ValorAlimentacao, @TotalKmRodado, @MediaConsumo, @ValorMedioCombustivel, @ValorAbastecido, @HorasTrabalhadas);
+        const string sql = @"INSERT INTO dados_do_dia (data, valorAlimentacao, totalKmRodado, mediaConsumo, valorMedioCombustivel, valorAbastecido)
+VALUES (@Data, @ValorAlimentacao, @TotalKmRodado, @MediaConsumo, @ValorMedioCombustivel, @ValorAbastecido);
 SELECT LAST_INSERT_ID();";
         using var connection = _dbConnectionFactory.CreateConnection();
         return await connection.ExecuteScalarAsync<int>(sql, request);
@@ -31,6 +33,10 @@ valorMedioCombustivel = @ValorMedioCombustivel, valorAbastecido = @ValorAbasteci
 WHERE id = @Id";
         using var connection = _dbConnectionFactory.CreateConnection();
         var rows = await connection.ExecuteAsync(sql, new { Id = id, request.Data, request.ValorAlimentacao, request.TotalKmRodado, request.MediaConsumo, request.ValorMedioCombustivel, request.ValorAbastecido, request.HorasTrabalhadas });
+valorMedioCombustivel = @ValorMedioCombustivel, valorAbastecido = @ValorAbastecido
+WHERE id = @Id";
+        using var connection = _dbConnectionFactory.CreateConnection();
+        var rows = await connection.ExecuteAsync(sql, new { Id = id, request.Data, request.ValorAlimentacao, request.TotalKmRodado, request.MediaConsumo, request.ValorMedioCombustivel, request.ValorAbastecido });
         return rows > 0;
     }
 
