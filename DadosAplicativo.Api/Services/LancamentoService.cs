@@ -27,6 +27,7 @@ public class LancamentoService : ILancamentoService
     {
         if (!await _lancamentoRepository.ExistePorIdAsync(id))
             throw new KeyNotFoundException("Lançamento não encontrado.");
+
         await Validar(request);
         await _lancamentoRepository.AtualizarAsync(id, request);
     }
@@ -35,6 +36,7 @@ public class LancamentoService : ILancamentoService
     {
         if (!await _lancamentoRepository.ExistePorIdAsync(id))
             throw new KeyNotFoundException("Lançamento não encontrado.");
+
         await _lancamentoRepository.ExcluirAsync(id);
     }
 
