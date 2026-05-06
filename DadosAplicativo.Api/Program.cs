@@ -27,10 +27,14 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("OpenCorsPolicy", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .AllowAnyOrigin()
+            .WithOrigins(
+                "https://id-preview--183c3a36-0a8f-45be-80a0-305afb32ca79.lovable.app",
+                "https://lovable.dev",
+                "http://localhost:5173",
+                "http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -44,7 +48,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-app.UseCors("OpenCorsPolicy");
+app.UseCors("AllowFrontend");
 
 app.UseAuthorization();
 
