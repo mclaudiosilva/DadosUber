@@ -13,5 +13,5 @@ public class DashboardPeriodoResponse
     public decimal TotalHorasTrabalhadas { get; set; }
     public decimal GanhoPorKm { get; set; }
     public decimal GanhoPorHora => TotalHorasTrabalhadas <= 0 ? 0 : LucroRealEstimado / TotalHorasTrabalhadas;
-    public decimal GanhoPorKm { get; set; }
+    
 }

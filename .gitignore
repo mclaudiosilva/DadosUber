@@ -12,3 +12,10 @@ obj/
 
 TestResults/
 .vscode/
+
+# Publish
+**/publish/
+publish/
+
+# Configs locais
+**/appsettings.Development.json

@@ -27,7 +27,7 @@ VALUES (@IdDadosDoDia, @Data, @IdEmpresa, @ValorCorridas); SELECT LAST_INSERT_ID
         const string sql = @"UPDATE lancamento SET id_dados_do_dia = @IdDadosDoDia, data = @Data, id_empresa = @IdEmpresa,
 valor_corridas = @ValorCorridas WHERE id = @Id";
         using var connection = _dbConnectionFactory.CreateConnection();
-        var rows = await connection.ExecuteAsync(sql, new { Id = id, request.IdDadosDoDia, request.Data, request.IdEmpresa, request.HorarioInicio, request.HorarioFim, request.ValorCorridas });
+        var rows = await connection.ExecuteAsync(sql, new { Id = id, request.IdDadosDoDia, request.Data, request.IdEmpresa, request.ValorCorridas });
         return rows > 0;
     }
 
