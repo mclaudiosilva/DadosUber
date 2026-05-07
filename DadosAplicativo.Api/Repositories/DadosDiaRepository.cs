@@ -30,6 +30,8 @@ valorMedioCombustivel = @ValorMedioCombustivel, valorAbastecido = @ValorAbasteci
 WHERE id = @Id";
         using var connection = _dbConnectionFactory.CreateConnection();
         var rows = await connection.ExecuteAsync(sql, new { Id = id, request.Data, request.ValorAlimentacao, request.TotalKmRodado, request.MediaConsumo, request.ValorMedioCombustivel, request.ValorAbastecido, request.HorasTrabalhadas });
+
+       
         return rows > 0;
     }
 
