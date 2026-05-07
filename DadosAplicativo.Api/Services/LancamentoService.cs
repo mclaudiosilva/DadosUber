@@ -27,6 +27,7 @@ public class LancamentoService : ILancamentoService
     {
         if (!await _lancamentoRepository.ExistePorIdAsync(id))
             throw new KeyNotFoundException("Lançamento não encontrado.");
+
         await Validar(request);
         await _lancamentoRepository.AtualizarAsync(id, request);
     }
@@ -35,6 +36,7 @@ public class LancamentoService : ILancamentoService
     {
         if (!await _lancamentoRepository.ExistePorIdAsync(id))
             throw new KeyNotFoundException("Lançamento não encontrado.");
+
         await _lancamentoRepository.ExcluirAsync(id);
     }
 
@@ -55,8 +57,6 @@ public class LancamentoService : ILancamentoService
             throw new ArgumentException("IdDadosDoDia informado não existe.");
         }
 
-        if (request.HorarioFim < request.HorarioInicio)
-            throw new ArgumentException("Horário fim não pode ser menor que horário início.");
         if (!await _dadosDiaRepository.ExistePorIdAsync(request.IdDadosDoDia))
             throw new ArgumentException("IdDadosDoDia informado não existe.");
         if (!await _empresaRepository.ExistePorIdAsync(request.IdEmpresa))
